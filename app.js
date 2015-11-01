@@ -43,7 +43,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.set('json spaces', 2);
 
-app.use(session({ secret: 'youwotm8' }));
+app.use(session({
+  resave: false,
+  secret: 'youwotm8',
+  saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
