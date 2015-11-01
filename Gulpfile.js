@@ -91,7 +91,15 @@ gulp.task('express-chill', function (cb) {
   });
 });
 
-gulp.task('serve', ['build', 'express', 'browsersync']);
-gulp.task('serve-chill', ['build', 'express-chill', 'browsersync']);
+gulp.task('mongo', function(cb) {
+  exec('mongod', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+})
+
+gulp.task('serve', ['build', 'mongo', 'express', 'browsersync']);
+gulp.task('serve-chill', ['build', 'mongo', 'express-chill', 'browsersync']);
 
 gulp.task('build', ['sass', 'js', 'fonts', 'images', 'static'])
