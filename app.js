@@ -48,6 +48,8 @@ app.use(session({
   secret: 'youwotm8',
   saveUninitialized: false
 }));
+
+require('./config/passport')(passport); // pass passport for configuration
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

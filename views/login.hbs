@@ -1,2 +1,15 @@
 <h1>{{title}}</h1>
 <p>Login page or something.</p>
+
+<form action="/login" method="post">
+  <div>
+    <label>Email</label>
+    <input type="text" class="form-control" name="email">
+    </div>
+  <div>
+    <label>Password</label>
+    <input type="password" class="form-control" name="password">
+  </div>
+
+  <button type="submit" class="btn btn-warning btn-lg">Login</button>
+</form>
