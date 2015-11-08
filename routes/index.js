@@ -15,7 +15,7 @@ router.get('/login', function(req, res) {
   res.render('login', { title: 'Login' });
 });
 
-router.get('/profile', function(req, res) {
+router.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile', { title: 'Profile', user: req.user });
 });
 
@@ -31,6 +31,15 @@ router.post('/login', passport.authenticate('login', {
   failureRedirect : '/login',
   failureFlash : true
 }));
+
+// Middleware function to chuck you away if you're not logged in
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect('/');
+  }
+}
 
 
 module.exports = router;
