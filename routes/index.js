@@ -4,15 +4,24 @@ var passport = require('passport');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', {
+    title: 'Express',
+    message: req.flash('message')
+  });
 });
 
 router.get('/register', function(req, res) {
-  res.render('register', { title: 'Register' });
+  res.render('register', {
+      title: 'Register',
+      message: req.flash('message')
+  });
 });
 
 router.get('/login', function(req, res) {
-  res.render('login', { title: 'Login' });
+  res.render('login', {
+    title: 'Login',
+    message: req.flash('message')
+  });
 });
 
 router.get('/profile', isLoggedIn, function(req, res) {
