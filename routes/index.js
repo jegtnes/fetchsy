@@ -16,7 +16,7 @@ router.get('/login', function(req, res) {
 });
 
 router.get('/profile', function(req, res) {
-  res.render('profile', { title: 'Profile' });
+  res.render('profile', { title: 'Profile', user: req.user });
 });
 
 // process the signup form
