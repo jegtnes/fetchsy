@@ -10,6 +10,10 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/shop/:shop', function() {
+  var rssURL = "https://www.etsy.com/shop/" + req.shop + "/rss";
+});
+
 router.get('/register', function(req, res) {
   res.render('register', {
       title: 'Register',
@@ -46,6 +50,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
+    req.flash('message', 'You must be logged in to view this page.')
     res.redirect('/');
   }
 }
