@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,9 +11,24 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/shop/:shop', function() {
-  var rssURL = "https://www.etsy.com/shop/" + req.shop + "/rss";
-});
+router.post('/shop/', function(req, res, next) {
+  var rssURL = "https://www.etsy.com/shop/" + req.body.shopName + "/rss";
+
+  request({
+    uri: rssURL,
+    followRedirect: false
+  }, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      console.log(body);
+    }
+    else if (response.statusCode == 404) {
+      console.log("Canny find the seller mate. You sure they've a shop?");
+    }
+    else {
+      console.log('here pal. unknown error. sorry and that');
+    }
+  });
+})
 
 router.get('/register', function(req, res) {
   res.render('register', {
